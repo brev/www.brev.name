@@ -1,0 +1,232 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="reset.css" media="screen" />  
+    <style>
+
+      body {
+        background-color: #000;
+        margin: 0 auto;
+        width: 375px;
+      }
+
+      main {
+        background-color: #fff;
+      }
+
+      img {
+        display: block;
+      }
+
+      .slide-down > img {
+        transform: translateY(0%);
+        transition: .333s ease-in-out;
+      }
+      .slide-up > img {
+        transform: translateY(-100%);
+        transition: .333s ease-in-out;
+      }
+
+    </style>
+  </head>
+  <body>
+    <main id="main">
+
+      <map name="header-map">
+        <area shape="rect" coords="0, 0, 85, 55" href="index.html" />
+        <area shape="rect" coords="100, 0, 270, 55" href="" onclick="
+          clear_overlays()
+          document.getElementById('search').style.display = 'block'
+          return false
+        " />
+        <area shape="rect" coords="290, 0, 375, 55" href="" onclick="
+          clear_overlays()
+          document.getElementById('menu').style.display = 'block'
+          return false
+        " />
+      </map> 
+      <img src="lite/header.png" style="margin-top:-1px;" usemap="#header-map" /> 
+     
+      <map name="breadcrumb-map">
+        <area shape="rect" coords="0, 0, 110, 45" href="index.html" />
+        <area shape="rect" coords="110, 0, 240, 45" href="#main" />
+        <area shape="rect" coords="303, 0, 338, 45" href="" onclick="
+          clear_overlays()
+          document.getElementById('search').style.display = 'block'
+          return false
+        " />
+        <area shape="rect" coords="338, 0, 375, 45" href="" onclick="
+          clear_overlays()
+          document.getElementById('menu').style.display = 'block'
+          return false
+        " />
+      </map> 
+      <img 
+        id="breadcrumb" 
+        src="lite/details-breadcrumb.png" 
+        usemap="#breadcrumb-map" 
+        style="
+          position:-webkit-sticky; 
+          position:sticky; 
+          top:0;
+          z-index: 50;
+        " 
+        />
+
+      <div id="mini" class="slide-up" style="
+        overflow: hidden;
+        position: fixed;
+        top: 55px;
+      ">
+        <img 
+          src="lite/details-results-first.png" 
+          style="
+            cursor:pointer;
+            margin:-1px 0;
+            width:375px; 
+          " 
+          onclick="document.getElementById('details-image').scrollIntoView()"
+        />
+      </div>
+ 
+      <img src="lite/details-brand.png" />
+      <img src="lite/details-title.png" />
+      <img src="lite/details-rating.png" />
+      <img id="details-image" src="lite/details-image.png" />
+      <img src="lite/details-shop.png" />
+
+      <img src="lite/details-family.png" />
+      <img src="lite/details-layers.png" />
+      <img src="lite/details-hour.png" />
+      <img src="lite/details-about.png" />
+      <img src="lite/details-details.png" />
+
+      <img src="lite/similar-title.png" />
+
+      <map name="similar-filter-map">
+        <area shape="rect" coords="188, 0, 375, 45" href="" onclick="
+          clear_overlays()
+          document.getElementById('filter').style.display = 'block'
+          return false
+        " />
+      </map>
+      <img 
+        id="similar-filter"
+        src="lite/similar-filter.png" 
+        style="margin: -1px 0;" 
+        usemap="#similar-filter-map" 
+      />
+      
+      <img src="lite/results.png" />
+      
+      <img src="lite/list-results-rest.png" style="margin-top:-2px;" />
+      
+      <img src="lite/social.png" />
+      
+      <a href="#main">
+        <img src="lite/back-top.png" />
+      </a>
+     
+      <img src="lite/footer.png" />
+
+      <div id="menu" class="overlay" style="
+        background: black;
+        display: none;
+        height: 100vh;
+        margin-top: -1px;
+        position: fixed;
+        top: 0;
+        width: 375px;
+        z-index: 100;
+      ">
+        <map name="menu-map">
+          <area shape="rect" coords="0, 0, 80, 55" href="index.html" />
+          <area shape="rect" coords="310, 0, 375, 55" href="" onclick="
+            clear_overlays()
+            return false
+          " />
+          <area shape="rect" coords="0, 55, 375, 110" href="index.html" />
+          <area shape="rect" coords="0, 450, 375, 510" href="" onclick="
+            mode_toggle()
+            return false
+          " />
+        </map> 
+        <img src="lite/main-menu.png" usemap="#menu-map" />
+      </div>
+      
+      <div id="search" class="overlay" style="
+        background: black;
+        display: none;
+        height: 100vh;
+        margin-top:-1px;
+        position: fixed;
+        top: 0;
+        width: 375px;
+        z-index: 100;
+      ">
+        <map name="search-map">
+          <area shape="rect" coords="320, 0, 375, 55" href="" onclick="
+            clear_overlays()
+            return false
+          " />
+          <area shape="rect" coords="0, 135, 375, 320" href="detail.html" />
+          <area shape="rect" coords="0, 370, 375, 420" href="index.html" />
+        </map>
+        <img src="lite/search.png" usemap="#search-map" />
+      </div>
+      
+      <div id="filter" class="overlay" style="
+        background: black;
+        display: none;
+        height: 100vh;
+        margin-top: -1px;
+        position: fixed;
+        top: 0;
+        width: 375px;
+        z-index: 100;
+      ">
+        <map name="filter-map">
+          <area shape="rect" coords="320, 0, 375, 55" href="" onclick="
+            clear_overlays()
+            return false
+          " />
+          <area shape="rect" coords="188, 522, 375, 577" href="" onclick="
+            clear_overlays()
+            return false
+          " />
+        </map>
+        <img src="lite/filter.png" usemap="#filter-map" />
+      </div>
+
+    </main>
+    <script src="ScrollMagic.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        mode_init()
+        const controller = new ScrollMagic.Controller()
+        const breadcrumb = scroll_breadcrumb(controller)
+        const mini = new ScrollMagic
+          .Scene({
+            offset: 1345,
+          })
+          .on('start', (event) => {
+            const mini = document.getElementById('mini')
+            const bottom = document.getElementById('breadcrumb').getBoundingClientRect().bottom
+            mini.style.top = bottom + 'px'
+            mini.classList.remove('slide-down', 'slide-up') 
+
+            if (event.scrollDirection === 'FORWARD') {
+              mini.classList.add('slide-down') 
+            }
+            else {
+              mini.classList.add('slide-up') 
+            }
+          })
+          .addTo(controller)
+      }, false)
+    </script>
+  </body>
+</html>
