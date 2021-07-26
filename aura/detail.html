@@ -71,14 +71,31 @@
           position:-webkit-sticky; 
           position:sticky; 
           top:0;
-          z-index: 50;
+          z-index: 10;
         " 
         />
+
+      <div id="shortcut" class="slide-up" style="
+        overflow: hidden;
+        position: fixed;
+        top: 55px;
+        z-index: -1;
+      ">
+        <img 
+          src="lite/shop-shortcut.png" 
+          style="
+            cursor:pointer;
+            width:375px; 
+          " 
+          onclick="document.getElementById('details-image').scrollIntoView()"
+        />
+      </div>
 
       <div id="mini" class="slide-up" style="
         overflow: hidden;
         position: fixed;
         top: 55px;
+        z-index: -1;
       ">
         <img 
           src="lite/details-results-first.png" 
@@ -95,7 +112,24 @@
       <img src="lite/details-title.png" />
       <img src="lite/details-rating.png" />
       <img id="details-image" src="lite/details-image.png" />
-      <img src="lite/details-shop.png" />
+
+      <map name="details-shop-map">
+        <area shape="rect" coords="60, 0, 311, 134" href="" onclick="
+          const el = document.getElementById('details-shop')
+          if (el.src.match(/-open/)) {
+            el.src = el.src.replace('-open', '')
+          }
+          else {
+            el.src = el.src.replace('details-shop', 'details-shop-open')
+          }
+          return false
+        " />
+      </map>
+      <img 
+        id="details-shop" 
+        src="lite/details-shop.png" 
+        usemap="#details-shop-map" 
+        />
 
       <img src="lite/details-family.png" />
       <img src="lite/details-layers.png" />
@@ -208,9 +242,31 @@
         mode_init()
         const controller = new ScrollMagic.Controller()
         const breadcrumb = scroll_breadcrumb(controller)
-        const mini = new ScrollMagic
+
+        const shortcut = new ScrollMagic
           .Scene({
-            offset: 1345,
+            offset: 740,
+          })
+          .on('start', (event) => {
+            const shortcut = document.getElementById('shortcut')
+            const bottom = document.getElementById('breadcrumb').getBoundingClientRect().bottom
+            shortcut.style.top = bottom + 'px'
+            shortcut.classList.remove('slide-down', 'slide-up') 
+
+            if (event.scrollDirection === 'FORWARD') {
+              shortcut.style['z-index'] = 100
+              shortcut.classList.add('slide-down')
+            }
+            else {
+              shortcut.classList.add('slide-up') 
+              setTimeout(() => { shortcut.style['z-index'] = -1 }, 500)
+            }
+          })
+          .addTo(controller)
+
+        const miniArrive = new ScrollMagic
+          .Scene({
+            offset: 1930,
           })
           .on('start', (event) => {
             const mini = document.getElementById('mini')
@@ -219,10 +275,33 @@
             mini.classList.remove('slide-down', 'slide-up') 
 
             if (event.scrollDirection === 'FORWARD') {
+              mini.style['z-index'] = 100
               mini.classList.add('slide-down') 
             }
             else {
               mini.classList.add('slide-up') 
+              setTimeout(() => { mini.style['z-index'] = -1 }, 500)
+            }
+          })
+          .addTo(controller)
+        
+        const miniLeave = new ScrollMagic
+          .Scene({
+            offset: 2680,
+          })
+          .on('start', (event) => {
+            const mini = document.getElementById('mini')
+            const bottom = document.getElementById('breadcrumb').getBoundingClientRect().bottom
+            mini.style.top = bottom + 'px'
+            mini.classList.remove('slide-down', 'slide-up') 
+
+            if (event.scrollDirection === 'FORWARD') {
+              mini.classList.add('slide-up') 
+              setTimeout(() => { mini.style['z-index'] = -1 }, 500)
+            }
+            else {
+              mini.style['z-index'] = 100
+              mini.classList.add('slide-down') 
             }
           })
           .addTo(controller)
