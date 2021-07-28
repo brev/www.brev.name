@@ -101,7 +101,6 @@
           src="lite/details-results-first.png" 
           style="
             cursor:pointer;
-            margin:-1px 0;
             width:375px; 
           " 
           onclick="document.getElementById('details-image').scrollIntoView()"
@@ -112,24 +111,7 @@
       <img src="lite/details-title.png" />
       <img src="lite/details-rating.png" />
       <img id="details-image" src="lite/details-image.png" />
-
-      <map name="details-shop-map">
-        <area shape="rect" coords="60, 0, 311, 134" href="" onclick="
-          const el = document.getElementById('details-shop')
-          if (el.src.match(/-open/)) {
-            el.src = el.src.replace('-open', '')
-          }
-          else {
-            el.src = el.src.replace('details-shop', 'details-shop-open')
-          }
-          return false
-        " />
-      </map>
-      <img 
-        id="details-shop" 
-        src="lite/details-shop.png" 
-        usemap="#details-shop-map" 
-        />
+      <img src="lite/details-shop.png" />
 
       <img src="lite/details-family.png" />
       <img src="lite/details-layers.png" />
@@ -245,7 +227,7 @@
 
         const shortcut = new ScrollMagic
           .Scene({
-            offset: 740,
+            offset: 707,
           })
           .on('start', (event) => {
             const shortcut = document.getElementById('shortcut')
@@ -266,7 +248,7 @@
 
         const miniArrive = new ScrollMagic
           .Scene({
-            offset: 1930,
+            offset: 1945,
           })
           .on('start', (event) => {
             const mini = document.getElementById('mini')
@@ -287,7 +269,7 @@
         
         const miniLeave = new ScrollMagic
           .Scene({
-            offset: 2680,
+            offset: 2720,
           })
           .on('start', (event) => {
             const mini = document.getElementById('mini')
